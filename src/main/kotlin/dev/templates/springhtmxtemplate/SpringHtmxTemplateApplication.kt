@@ -1,4 +1,4 @@
-package dev.templates.spring_htmx_template
+package dev.templates.springhtmxtemplate
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

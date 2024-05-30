@@ -1,4 +1,4 @@
-package dev.templates.spring_htmx_template
+package dev.templates.springhtmxtemplate
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
