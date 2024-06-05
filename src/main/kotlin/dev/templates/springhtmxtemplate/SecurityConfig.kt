@@ -36,6 +36,8 @@ class SecurityConfig(
                     .loginPage("/login")
                     .permitAll()
             }
+            .csrf { csrf -> csrf.disable() }
+            .headers { headers -> headers.frameOptions { frameOptions -> frameOptions.sameOrigin().disable() } }
             .authenticationProvider(customAuthenticationProvider)
         return http.build()
     }

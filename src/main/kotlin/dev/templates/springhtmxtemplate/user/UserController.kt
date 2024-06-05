@@ -20,7 +20,7 @@ class UserController(
         return "registration"
     }
 
-    @PostMapping
+    @PostMapping("/registration")
     fun registerUser(user: User): String {
         userService.save(user)
         return "redirect:/login"

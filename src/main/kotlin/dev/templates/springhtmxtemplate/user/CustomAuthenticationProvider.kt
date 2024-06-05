@@ -14,7 +14,7 @@ class CustomAuthenticationProvider(
             throw Exception("Authentication cannot be null")
         }
         val userDetails = customUserDetailsService.loadUserByUsername(authentication.name)
-        return UsernamePasswordAuthenticationToken(userDetails.password, userDetails.password)
+        return UsernamePasswordAuthenticationToken(userDetails.password, userDetails.password, userDetails.authorities)
     }
 
     override fun supports(authentication: Class<*>?): Boolean {

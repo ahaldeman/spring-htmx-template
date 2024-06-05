@@ -1,6 +1,7 @@
-CREATE TABLE "user"
+CREATE TABLE users
 (
-    id BIGINT NOT NULL PRIMARY KEY,
+    id BIGSERIAL NOT NULL PRIMARY KEY,
     email VARCHAR(255),
-    password VARCHAR(255)
+    password VARCHAR(255),
+    roles VARCHAR(255)
 )
