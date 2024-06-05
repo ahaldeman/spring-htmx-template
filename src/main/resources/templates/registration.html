@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+    <title>Register</title>
+</head>
+<body>
+<main class="container">
+    <h1>Register</h1>
+    <form th:action="@{/registration}" th:object="${user}" method="post">
+        <div>
+            <label>Email:</label>
+            <input type="text" th:field="*{email}"/>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" th:field="*{password}"/>
+        </div>
+        <div>
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>
