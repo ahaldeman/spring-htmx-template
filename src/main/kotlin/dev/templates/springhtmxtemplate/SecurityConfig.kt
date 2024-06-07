@@ -36,9 +36,6 @@ class SecurityConfig(
                 authorize
                     .requestMatchers(
                         "/registration",
-                        "/js/**",
-                        "/css/**",
-                        "/img/**",
                         "/h2-console/**",
                     )
                     .permitAll()

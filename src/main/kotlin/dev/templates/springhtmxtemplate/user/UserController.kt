@@ -4,13 +4,17 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 class UserController(
     private val userService: UserService
 ) {
     @GetMapping("/login")
-    fun login(): String {
+    fun login(@RequestParam("error") error: String?, model: Model): String {
+        if (error != null) {
+            model.addAttribute("error", "Invalid username or password")
+        }
         return "login"
     }
 
