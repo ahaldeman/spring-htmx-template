@@ -6,7 +6,7 @@
     <body>
         <main class="container">
             <h1>Spring HTMX Template</h1>
-            <p>You are now logged in.</p>
+            <p>Welcome, <span th:text="${user.getFirstName()}"/></p>
             <a th:href="@{/logout}">Logout</a>
         </main>
     </body>

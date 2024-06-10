@@ -48,9 +48,11 @@ class AuthTest(
     @Test
     fun `it allows user to register and successfully login and logout`() {
         val email = "me@email.com"
+        val firstName = "John"
+        val lastName = "Doe"
         val password = "somePassword"
 
-        registerUser(email = email, password = password)
+        registerUser(email = email, firstName = firstName, lastName = lastName, password = password)
             .shouldRedirectTo("/login")
 
         val sessionCookie = login(email = email, password = password)
@@ -61,11 +63,12 @@ class AuthTest(
             .cookie("JSESSIONID", sessionCookie)
             .exchange()
             .expectStatus().isOk
+            .expectBody(String::class.java)
+            .consumeWith { body -> body.responseBody shouldContain "Welcome, <span>John</span>"}
 
         webTestClient.get().uri("/logout")
             .exchange()
             .shouldRedirectTo("/login\\?logout")
-
     }
 
     @Test
@@ -80,10 +83,17 @@ class AuthTest(
             .consumeWith { body -> body.responseBody shouldContain "Invalid username or password" }
     }
 
-    private fun registerUser(email: String, password: String): WebTestClient.ResponseSpec {
+    private fun registerUser(
+        email: String,
+        firstName: String,
+        lastName: String,
+        password: String,
+    ): WebTestClient.ResponseSpec {
         return webTestClient.post().uri("/registration")
             .body(BodyInserters
                 .fromFormData("email", email)
+                .with("firstName", firstName)
+                .with("lastName", lastName)
                 .with("password", password)
             )
             .exchange()

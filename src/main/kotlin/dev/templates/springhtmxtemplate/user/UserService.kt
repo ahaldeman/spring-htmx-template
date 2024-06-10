@@ -1,6 +1,7 @@
 package dev.templates.springhtmxtemplate.user
 
 import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
@@ -14,11 +15,8 @@ class UserService(
         userRepository.save(user.copy(password = encodedPassword))
     }
 
-    fun findByEmail(email: String): User? {
-        return userRepository.findByEmail(email = email)
-    }
-
     fun getCurrentUser(): User {
-        return User()
+        val userDetails = SecurityContextHolder.getContext().authentication.principal as UserDetailsModel
+        return userRepository.findByEmail(userDetails.username) ?: throw Exception("Could not find user ${userDetails.username}")
     }
 }
